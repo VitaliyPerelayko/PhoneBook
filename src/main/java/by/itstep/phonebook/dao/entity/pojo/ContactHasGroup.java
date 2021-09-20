@@ -1,23 +1,22 @@
-package by.itstep.phonebook.entity.pojo;
+package by.itstep.phonebook.dao.entity.pojo;
 
-import by.itstep.phonebook.entity.Contact;
-import by.itstep.phonebook.entity.Group;
+import by.itstep.phonebook.dao.entity.Contact;
+import by.itstep.phonebook.dao.entity.Group;
 import com.opencsv.bean.CsvBindByName;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ContactHasGroup {
 
     @CsvBindByName(column = "id")
-    private Integer id;
+    private Long id;
     @CsvBindByName(column = "contact_id")
-    private Integer contactId;
+    private Long contactId;
     @CsvBindByName(column = "group_id")
-    private Integer groupId;
+    private Long groupId;
 
-    public ContactHasGroup(Integer id, Integer contactId, Integer groupId) {
+    public ContactHasGroup(Long id, Long contactId, Long groupId) {
         this.id = id;
         this.contactId = contactId;
         this.groupId = groupId;
@@ -26,33 +25,33 @@ public class ContactHasGroup {
     public ContactHasGroup() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getContactId() {
+    public Long getContactId() {
         return contactId;
     }
 
-    public void setContactId(Integer contactId) {
+    public void setContactId(Long contactId) {
         this.contactId = contactId;
     }
 
-    public Integer getGroupId() {
+    public Long getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Integer groupId) {
+    public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
 
-    public static List<ContactHasGroup> parse(Contact contact, Integer id) {
+    public static List<ContactHasGroup> parse(Contact contact, Long id) {
         List<ContactHasGroup> contactHasGroups = new ArrayList<>();
-        Integer contactId = contact.getId();
+        Long contactId = contact.getId();
         for (Group group: contact.getGroups()){
             contactHasGroups.add(new ContactHasGroup(id, contactId, group.getId()));
             id++;

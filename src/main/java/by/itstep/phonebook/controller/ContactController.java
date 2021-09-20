@@ -1,6 +1,6 @@
 package by.itstep.phonebook.controller;
 
-import by.itstep.phonebook.entity.Contact;
+import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.service.ServiceException;
 
 import java.util.List;

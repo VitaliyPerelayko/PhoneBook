@@ -1,8 +1,8 @@
-package by.itstep.phonebook.dao.impl;
+package by.itstep.phonebook.dao.repository.impl;
 
-import by.itstep.phonebook.dao.ContactDAO;
-import by.itstep.phonebook.entity.Contact;
-import by.itstep.phonebook.entity.Group;
+import by.itstep.phonebook.dao.entity.Contact;
+import by.itstep.phonebook.dao.entity.Group;
+import by.itstep.phonebook.dao.repository.ContactDAO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class ContactDaoJdbsImpl implements ContactDAO {
             connection.commit();
             ResultSet res = statement.getGeneratedKeys();
             res.next();
-            contact.setId(res.getInt(1));
+            contact.setId(res.getLong(1));
             return contact;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -62,9 +62,9 @@ public class ContactDaoJdbsImpl implements ContactDAO {
         try {
             PreparedStatement statement = connection.prepareStatement(queryGetAll);
             ResultSet res = statement.executeQuery();
-            Map<Integer, Contact> idToContacts = new HashMap<>();
+            Map<Long, Contact> idToContacts = new HashMap<>();
             while (res.next()) {
-                Integer id = res.getInt("id");
+                Long id = res.getLong("id");
                 if (idToContacts.containsKey(id)) {
                     idToContacts.get(id).addGroup(new Group(res.getString("name")));
                     continue;

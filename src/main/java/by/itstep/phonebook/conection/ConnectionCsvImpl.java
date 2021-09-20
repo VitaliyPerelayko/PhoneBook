@@ -68,10 +68,10 @@ public class ConnectionCsvImpl<T> {
      * @param path path to file
      * @return return max value from field id
      */
-    public Integer getId(String path) {
+    public Long getId(String path) {
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
-            return stream.skip(1).mapToInt(value ->
-                    Integer.parseInt(value.substring(0, value.indexOf(SEPARATOR)))).
+            return stream.skip(1).mapToLong(value ->
+                    Long.parseLong(value.substring(0, value.indexOf(SEPARATOR)))).
                     max().orElse(-1);
         } catch (IOException e) {
             throw new ConnectionException(e);

@@ -28,8 +28,8 @@ public class ConnectionTest {
 
     @Test
     public void getIdTest(){
-        Integer id = connection.getId(CONTACT_HAS_GROUP_PATH);
-        Integer contactId = connection.getId(CONTACT_PATH);
+        Long id = connection.getId(CONTACT_HAS_GROUP_PATH);
+        Long contactId = connection.getId(CONTACT_PATH);
         System.out.println(id);
         System.out.println(contactId);
     }

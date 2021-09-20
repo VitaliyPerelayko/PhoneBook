@@ -1,8 +1,8 @@
 package by.itstep.phonebook.sevice;
 
-import by.itstep.phonebook.dao.ContactDAO;
-import by.itstep.phonebook.dao.DaoFactory;
-import by.itstep.phonebook.entity.Contact;
+import by.itstep.phonebook.dao.repository.ContactDAO;
+import by.itstep.phonebook.dao.repository.impl.DaoFactory;
+import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.service.ServiceException;
 import by.itstep.phonebook.service.impl.ContactServiceImpl;
 import org.junit.Before;
@@ -11,8 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Set;
 
 import static by.itstep.phonebook.data.ContactTestDataFactory.createContact;
 import static org.junit.Assert.assertEquals;

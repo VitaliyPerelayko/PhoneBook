@@ -1,7 +1,6 @@
-package by.itstep.phonebook.dao;
+package by.itstep.phonebook.dao.repository.impl;
 
-import by.itstep.phonebook.dao.impl.ContactDaoCsvImpl;
-import by.itstep.phonebook.dao.impl.ContactDaoJdbsImpl;
+import by.itstep.phonebook.dao.repository.ContactDAO;
 
 public class DaoFactory {
 

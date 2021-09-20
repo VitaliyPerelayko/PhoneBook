@@ -2,7 +2,7 @@ package by.itstep.phonebook.view.servlets;
 
 import by.itstep.phonebook.controller.ContactController;
 import by.itstep.phonebook.controller.impl.ContactControllerImpl;
-import by.itstep.phonebook.entity.Contact;
+import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.service.ServiceException;
 
 import javax.servlet.RequestDispatcher;

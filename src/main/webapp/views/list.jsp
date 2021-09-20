@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="by.itstep.phonebook.entity.Contact" %>
+<%@ page import="by.itstep.phonebook.dao.entity.Contact" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

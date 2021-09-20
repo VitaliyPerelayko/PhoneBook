@@ -1,7 +1,7 @@
 package by.itstep.phonebook.data;
 
-import by.itstep.phonebook.entity.Contact;
-import by.itstep.phonebook.entity.Group;
+import by.itstep.phonebook.dao.entity.Contact;
+import by.itstep.phonebook.dao.entity.Group;
 
 import java.util.Collections;
 import java.util.HashSet;

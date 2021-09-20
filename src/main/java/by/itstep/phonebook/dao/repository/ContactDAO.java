@@ -1,6 +1,6 @@
-package by.itstep.phonebook.dao;
+package by.itstep.phonebook.dao.repository;
 
-import by.itstep.phonebook.entity.Contact;
+import by.itstep.phonebook.dao.entity.Contact;
 
 import java.util.List;
 

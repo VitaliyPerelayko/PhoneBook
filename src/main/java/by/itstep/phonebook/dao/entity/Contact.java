@@ -1,22 +1,40 @@
-package by.itstep.phonebook.entity;
+package by.itstep.phonebook.dao.entity;
 
+import by.itstep.phonebook.dao.entity.converter.ListStringConverter;
 import com.opencsv.bean.CsvBindByName;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity(name = "contact")
+@Table(name = "contact")
 public class Contact {
 
     @CsvBindByName(column = "id")
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @CsvBindByName(column = "firsName")
+    @Column(name = "first_name", length = 50)
     private String firsName;
+    @Column(name = "last_name", length = 50, nullable = false)
     @CsvBindByName(column = "lastName")
     private String lastName;
     @CsvBindByName(column = "phone_set")
-    private Set<String> phones;
+    @Column(name = "phones", nullable = false)
+    @Convert(converter = ListStringConverter.class)
+    private Set<String> phones = new HashSet<>();
+    @Column(name = "email", length = 50)
     @CsvBindByName(column = "email")
     private String email;
+    @ManyToMany
+    @JoinTable(
+            name = "contact_has_group",
+            joinColumns = @JoinColumn(name = "contact_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_Id")
+    )
     private Set<Group> groups = new HashSet<>();
 
     public Contact(String firsName, String lastName, Set<String> phones, String email, Set<Group> groups) {
@@ -30,11 +48,11 @@ public class Contact {
     public Contact() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,5 +103,21 @@ public class Contact {
     @Override
     public String toString(){
         return String.format("Last Name: %s  Email: %s Phones: %s Groups: %s", lastName, email, phones, groups);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(id, contact.id) &&
+                Objects.equals(firsName, contact.firsName) &&
+                Objects.equals(lastName, contact.lastName) &&
+                Objects.equals(email, contact.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firsName, lastName, email);
     }
 }

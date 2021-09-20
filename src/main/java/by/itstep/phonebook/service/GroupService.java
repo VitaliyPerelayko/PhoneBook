@@ -1,6 +1,6 @@
 package by.itstep.phonebook.service;
 
-import by.itstep.phonebook.entity.Group;
+import by.itstep.phonebook.dao.entity.Group;
 
 import java.util.Set;
 

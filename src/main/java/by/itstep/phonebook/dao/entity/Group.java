@@ -1,18 +1,25 @@
-package by.itstep.phonebook.entity;
+package by.itstep.phonebook.dao.entity;
 
 import com.opencsv.bean.CsvBindByName;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity(name = "group")
+@Table(name = "group")
 public class Group {
 
     @CsvBindByName(column = "id")
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @CsvBindByName(column = "name")
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
+    @ManyToMany(mappedBy = "groups")
     private Set<Contact> contacts;
 
-    public Group(Integer id, String name, Set<Contact> contacts) {
+    public Group(Long id, String name, Set<Contact> contacts) {
         this.id = id;
         this.name = name;
         this.contacts = contacts;
@@ -25,11 +32,11 @@ public class Group {
     public Group() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

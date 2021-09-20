@@ -1,9 +1,9 @@
 package by.itstep.phonebook.service.impl;
 
-import by.itstep.phonebook.dao.ContactDAO;
-import by.itstep.phonebook.dao.DaoFactory;
-import by.itstep.phonebook.entity.Contact;
-import by.itstep.phonebook.entity.Group;
+import by.itstep.phonebook.dao.repository.ContactDAO;
+import by.itstep.phonebook.dao.repository.impl.DaoFactory;
+import by.itstep.phonebook.dao.entity.Contact;
+import by.itstep.phonebook.dao.entity.Group;
 import by.itstep.phonebook.service.ContactService;
 import by.itstep.phonebook.service.ServiceException;
 
