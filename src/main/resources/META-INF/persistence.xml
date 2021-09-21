@@ -23,4 +23,28 @@
             <property name="show_sql" value="true" />
         </properties>
     </persistence-unit>
+
+
+    <persistence-unit name="jpa-h2-phone-book">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>by.itstep.phonebook.dao.entity.Contact</class>
+        <class>by.itstep.phonebook.dao.entity.Group</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.driver"
+                      value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:h2:mem:phonebook" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.H2Dialect" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="show_sql" value="true" />
+<!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+<!--            <property name="javax.persistence.schema-generation.create-source" value="script"/>-->
+<!--            <property name="javax.persistence.schema-generation.create-script-source" value="scripts/createSchemeH2.sql"/>-->
+            <property name="javax.persistence.sql-load-script-source" value="scripts/insertdata.sql"/>
+        </properties>
+    </persistence-unit>
 </persistence>

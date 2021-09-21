@@ -15,6 +15,7 @@
         <mockito-all>1.10.19</mockito-all>
         <junit-jupiter>5.7.2</junit-jupiter>
         <!-- DATABASE -->
+        <h2-database>1.4.200</h2-database>
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <hibernate.version>5.4.14.Final</hibernate.version>
         <opencsv>5.3</opencsv>
@@ -35,11 +36,12 @@
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
             <version>${javax.persistence-api.version}</version>
-        </dependency><dependency>
+        </dependency>
+        <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-core</artifactId>
         <version>${hibernate.version}</version>
-    </dependency>
+        </dependency>
 
         <!-- JDBC -->
         <dependency>
@@ -47,6 +49,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java}</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2-database}</version>
+        </dependency>
+
 
         <!-- TESTING  -->
         <dependency>
@@ -79,15 +87,6 @@
             <artifactId>opencsv</artifactId>
             <version>${opencsv}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.5.7.Final</version>
-        </dependency>
-
-
     </dependencies>
 
 
@@ -98,8 +97,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <!-- Configure the Tomcat Maven plugin -->

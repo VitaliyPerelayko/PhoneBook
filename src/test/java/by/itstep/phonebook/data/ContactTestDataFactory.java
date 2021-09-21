@@ -20,7 +20,7 @@ public class ContactTestDataFactory {
                                         String email,
                                         Set<Group> groups) {
         return new Contact("testFirstName", lastName,
-                new HashSet<>(Collections.singletonList(phone)),
+                Collections.singletonList(phone),
                 email, groups);
     }
 }

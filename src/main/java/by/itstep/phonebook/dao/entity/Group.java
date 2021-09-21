@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name = "group")
-@Table(name = "group")
+@Table(name = "circle")
 public class Group {
 
     @CsvBindByName(column = "id")

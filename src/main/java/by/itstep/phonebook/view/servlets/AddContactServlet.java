@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -41,7 +43,7 @@ public class AddContactServlet extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
-        Set<String> phones = new HashSet<>();
+        List<String> phones = new ArrayList<>();
         phones.add(phone);
         Contact contact = new Contact(firstName, lastName, phones, email, null);
         try {

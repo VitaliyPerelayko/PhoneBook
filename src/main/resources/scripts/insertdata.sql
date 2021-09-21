@@ -1,0 +1,11 @@
+INSERT INTO contact (first_name, last_name, email, phones) VALUES ('Oleg1', 'Oleg1', 'Oleg1@email.com', '+375-29-1231231;+375-291478521');
+INSERT INTO contact (first_name, last_name, email, phones) VALUES ('Oleg2', 'Oleg2', 'Oleg2@email.com', '+375-29-1231232;+375-291478522');
+INSERT INTO contact (first_name, last_name, email, phones) VALUES ('Oleg3', 'Oleg3', 'Oleg3@email.com', '+375-29-1231233;+375-291478523');
+INSERT INTO contact (first_name, last_name, email, phones) VALUES ('Oleg4', 'Oleg4', 'Oleg4@email.com', '+375-29-1231234;+375-291478524');
+INSERT INTO circle (name) VALUES ('family');
+INSERT INTO circle (name) VALUES ('work');
+INSERT INTO contact_has_group (contact_id, group_id) VALUES (1,2);
+INSERT INTO contact_has_group (contact_id, group_id) VALUES (2,1);
+INSERT INTO contact_has_group (contact_id, group_id) VALUES (2,2);
+INSERT INTO contact_has_group (contact_id, group_id) VALUES (3,1);
+INSERT INTO contact_has_group (contact_id, group_id) VALUES (4,2);

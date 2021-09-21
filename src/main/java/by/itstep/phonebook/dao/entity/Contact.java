@@ -5,6 +5,7 @@ import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class Contact {
     @CsvBindByName(column = "phone_set")
     @Column(name = "phones", nullable = false)
     @Convert(converter = ListStringConverter.class)
-    private Set<String> phones = new HashSet<>();
+    private List<String> phones;
     @Column(name = "email", length = 50)
     @CsvBindByName(column = "email")
     private String email;
@@ -37,7 +38,7 @@ public class Contact {
     )
     private Set<Group> groups = new HashSet<>();
 
-    public Contact(String firsName, String lastName, Set<String> phones, String email, Set<Group> groups) {
+    public Contact(String firsName, String lastName, List<String> phones, String email, Set<Group> groups) {
         this.firsName = firsName;
         this.lastName = lastName;
         this.phones = phones;
@@ -72,11 +73,11 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    public Set<String> getPhones() {
+    public List<String> getPhones() {
         return phones;
     }
 
-    public void setPhones(Set<String> phones) {
+    public void setPhones(List<String> phones) {
         this.phones = phones;
     }
 

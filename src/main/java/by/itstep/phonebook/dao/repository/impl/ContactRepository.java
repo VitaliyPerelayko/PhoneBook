@@ -14,17 +14,21 @@ public class ContactRepository implements ContactDAO {
 
     public ContactRepository() {
         super();
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("jpa-mysql-phone-book");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("jpa-h2-phone-book");
         entityManager = factory.createEntityManager();
     }
 
     @Override
     public Contact save(Contact contact) {
-        return null;
+        return entityManager.merge(contact);
     }
 
     @Override
     public List<Contact> findAll() {
         return entityManager.createQuery("FROM contact c",Contact.class).getResultList();
+    }
+
+    public Contact find(Long id){
+        return entityManager.find(Contact.class, id);
     }
 }

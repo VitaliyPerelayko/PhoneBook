@@ -1,5 +1,6 @@
 package by.itstep.phonebook;
 
+import java.util.List;
 import java.util.Set;
 
 public class Utils {
@@ -14,7 +15,7 @@ public class Utils {
         return text.matches(TEXT_PATTERN);
     }
 
-    public static boolean isPhones(Set<String> phones){
+    public static boolean isPhones(List<String> phones){
         return phones.stream().allMatch(phone -> phone.matches(PHONE_PATTERN));
     }
 
