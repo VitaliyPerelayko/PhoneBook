@@ -1,19 +1,16 @@
 package by.itstep.phonebook.dao.entity;
 
-import com.opencsv.bean.CsvBindByName;
-
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "group")
 @Table(name = "circle")
 public class Group {
 
-    @CsvBindByName(column = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @CsvBindByName(column = "name")
     @Column(name = "name", length = 50, nullable = false)
     private String name;
     @ManyToMany(mappedBy = "groups")
@@ -59,5 +56,19 @@ public class Group {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equals(id, group.id) &&
+                name.equals(group.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

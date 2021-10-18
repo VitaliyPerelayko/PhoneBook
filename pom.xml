@@ -90,12 +90,6 @@
             <version>${junit-jupiter}</version>
             <scope>test</scope>
         </dependency>
-        <!-- CSV  -->
-        <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>${opencsv}</version>
-        </dependency>
     </dependencies>
 
 

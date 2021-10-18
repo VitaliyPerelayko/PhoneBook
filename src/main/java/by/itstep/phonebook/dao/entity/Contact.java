@@ -13,22 +13,17 @@ import java.util.Set;
 @Table(name = "contact")
 public class Contact {
 
-    @CsvBindByName(column = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @CsvBindByName(column = "firsName")
     @Column(name = "first_name", length = 50)
     private String firsName;
     @Column(name = "last_name", length = 50, nullable = false)
-    @CsvBindByName(column = "lastName")
     private String lastName;
-    @CsvBindByName(column = "phone_set")
     @Column(name = "phones", nullable = false)
     @Convert(converter = ListStringConverter.class)
     private List<String> phones;
     @Column(name = "email", length = 50)
-    @CsvBindByName(column = "email")
     private String email;
     @ManyToMany
     @JoinTable(
