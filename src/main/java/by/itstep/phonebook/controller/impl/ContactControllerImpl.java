@@ -4,17 +4,18 @@ import by.itstep.phonebook.controller.ContactController;
 import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.service.ContactService;
 import by.itstep.phonebook.service.ServiceException;
-import by.itstep.phonebook.service.ServiceFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 
+@Component
 public class ContactControllerImpl implements ContactController {
 
     private ContactService contactService;
 
-    public ContactControllerImpl() {
-        this.contactService = ServiceFactory.getInstance().getContactService();
+    public ContactControllerImpl(ContactService contactService) {
+        this.contactService = contactService;
     }
 
     @Override

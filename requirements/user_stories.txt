@@ -1,0 +1,21 @@
+1) save contact (pop up window):
+form: base fields + set of groups (select group as multi picklist)
+1.1) retrieve groups
+1.1.1 cache groups (feature)
+2) show all contacts:
+table
+pagination
+row link to detail page
+delete contact button
+crete new contact button
+3) show one contact detail page
+get all info about contact
+update contact
+delete contact
+add contact to group (create new group if needed pop up window)
+4) add exception handling
+5) add contact to black list (feature)
+6) security
+add user role and permission table (add flyway framework)
+7) localization
+8) filter contacts (feature)

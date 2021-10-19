@@ -1,11 +1,12 @@
 package by.itstep.phonebook.service.impl;
 
-import by.itstep.phonebook.dao.repository.ContactDAO;
-import by.itstep.phonebook.dao.repository.impl.DaoFactory;
 import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.dao.entity.Group;
+import by.itstep.phonebook.dao.repository.ContactRepository;
 import by.itstep.phonebook.service.ContactService;
 import by.itstep.phonebook.service.ServiceException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -13,37 +14,44 @@ import java.util.stream.Collectors;
 
 import static by.itstep.phonebook.Utils.*;
 
+@Service
 public class ContactServiceImpl implements ContactService {
 
-    private ContactDAO contactDAO;
+    private ContactRepository contactRepository;
 
-    public ContactServiceImpl() {
-        this.contactDAO = DaoFactory.getInstance().getContactDAO();
+    public ContactServiceImpl(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
     }
 
     @Override
-    public void createContact(Contact contact) throws ServiceException {
-        if (validateNewContact(contact)) {
-            Set<Group> groups = contact.getGroups();
-            if (groups != null && !groups.isEmpty()) {
-                groups = groups.stream().filter(group ->
-                                group.getId() == null).collect(Collectors.toSet());
-                if (groups.isEmpty()) {
-                    contact.setGroups(null);
-                } else {
-                    contact.setGroups(groups);
-                }
+    @Transactional
+    public Contact createContact(Contact contact) throws ServiceException {
+        validateNewContact(contact);
+        Set<Group> groups = contact.getGroups();
+        if (groups != null && !groups.isEmpty()) {
+            groups = groups.stream().filter(group ->
+                    group.getId() == null).collect(Collectors.toSet());
+            if (groups.isEmpty()) {
+                contact.setGroups(null);
+            } else {
+                contact.setGroups(groups);
             }
-            contactDAO.save(contact);
         }
+        return contactRepository.save(contact);
+    }
+
+    @Override
+    @Transactional
+    public Contact addContactToGroup(Contact contact, Group group) {
+        return contact;
     }
 
     @Override
     public List<Contact> getAll() {
-        return contactDAO.findAll();
+        return contactRepository.findAll();
     }
 
-    private boolean validateNewContact(Contact contact) throws ServiceException {
+    private void validateNewContact(Contact contact) throws ServiceException {
         if (contact == null) throw new ServiceException("Contact is null");
         if (!isText(contact.getFirsName()))
             throw new ServiceException("Contact firstName must contain only letters");
@@ -58,6 +66,5 @@ public class ContactServiceImpl implements ContactService {
             if (!isPhones(contact.getPhones()))
                 throw new ServiceException("Contact phone format is illegal. Try +###-##-#######");
         }
-        return true;
     }
 }

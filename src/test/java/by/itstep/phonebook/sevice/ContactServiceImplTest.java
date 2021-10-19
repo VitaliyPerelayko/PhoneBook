@@ -1,6 +1,6 @@
 package by.itstep.phonebook.sevice;
 
-import by.itstep.phonebook.dao.repository.ContactDAO;
+import by.itstep.phonebook.dao.repository.ContactRepository;
 import by.itstep.phonebook.dao.repository.impl.DaoFactory;
 import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.service.ServiceException;
@@ -26,7 +26,7 @@ public class ContactServiceImplTest {
     @Mock
     private DaoFactory daoFactory;
     @Mock
-    private ContactDAO contactDAO;
+    private ContactRepository contactRepository;
 
     private Contact validContact = createContact("TestLastName",
             "+375-29-1234567");
@@ -35,7 +35,7 @@ public class ContactServiceImplTest {
 
     @Before
     public void setUp() {
-        when(daoFactory.getContactDAO()).thenReturn(contactDAO);
+        when(daoFactory.getContactDAO()).thenReturn(contactRepository);
     }
 
     @Test
