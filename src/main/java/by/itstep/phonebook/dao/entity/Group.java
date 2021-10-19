@@ -16,10 +16,9 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     private Set<Contact> contacts;
 
-    public Group(Long id, String name, Set<Contact> contacts) {
+    public Group(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.contacts = contacts;
     }
 
     public Group(String name) {

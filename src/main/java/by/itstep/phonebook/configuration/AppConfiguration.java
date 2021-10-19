@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan(basePackages = "by.itstep.phonebook")
-@Import({DatabaseConfiguration.class})
+@Import({DatabaseConfiguration.class, WebConfiguration.class})
 public class AppConfiguration {
 }

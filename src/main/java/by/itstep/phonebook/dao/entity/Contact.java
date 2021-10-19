@@ -1,7 +1,6 @@
 package by.itstep.phonebook.dao.entity;
 
 import by.itstep.phonebook.dao.entity.converter.ListStringConverter;
-import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
 import java.util.HashSet;

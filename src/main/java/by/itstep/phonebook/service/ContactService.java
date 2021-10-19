@@ -7,9 +7,17 @@ import java.util.List;
 
 public interface ContactService {
 
-    Contact createContact(Contact contact) throws ServiceException;
+    Contact save(Contact contact);
+
+    Contact update(Contact contact);
 
     Contact addContactToGroup(Contact contact, Group group);
 
     List<Contact> getAll();
+
+    Contact getById(Long id);
+
+    void delete(Contact contact);
+
+    Boolean isExist(Long Id);
 }

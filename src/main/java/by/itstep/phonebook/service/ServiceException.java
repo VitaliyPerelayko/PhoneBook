@@ -1,6 +1,6 @@
 package by.itstep.phonebook.service;
 
-public class ServiceException extends Exception{
+public class ServiceException extends RuntimeException{
 
     public ServiceException(String message){
         super(message);
@@ -8,5 +8,9 @@ public class ServiceException extends Exception{
 
     public ServiceException(String message, Exception ex){
         super(message, ex);
+    }
+
+    public ServiceException(String message, Object... obj){
+        this(String.format(message,obj));
     }
 }

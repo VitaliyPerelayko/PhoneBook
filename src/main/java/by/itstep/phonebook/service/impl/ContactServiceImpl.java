@@ -5,19 +5,21 @@ import by.itstep.phonebook.dao.entity.Group;
 import by.itstep.phonebook.dao.repository.ContactRepository;
 import by.itstep.phonebook.service.ContactService;
 import by.itstep.phonebook.service.ServiceException;
+import by.itstep.phonebook.service.validation.ServiceValidationException;
+import org.h2.engine.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static by.itstep.phonebook.Utils.*;
+import static by.itstep.phonebook.service.validation.ValidationUtils.*;
 
 @Service
 public class ContactServiceImpl implements ContactService {
 
-    private ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 
     public ContactServiceImpl(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
@@ -25,25 +27,30 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional
-    public Contact createContact(Contact contact) throws ServiceException {
+    public Contact save(Contact contact) {
         validateNewContact(contact);
-        Set<Group> groups = contact.getGroups();
-        if (groups != null && !groups.isEmpty()) {
-            groups = groups.stream().filter(group ->
-                    group.getId() == null).collect(Collectors.toSet());
-            if (groups.isEmpty()) {
-                contact.setGroups(null);
-            } else {
-                contact.setGroups(groups);
-            }
-        }
-        return contactRepository.save(contact);
+        return contactRepository.saveAndFlush(contact);
+    }
+
+    @Override
+    @Transactional
+    public Contact update(Contact contact) {
+        if (contact.getId() == null) throw new ServiceException("You can update only persist contacts. contact %s does not have an id", contact);
+        validateNewContact(contact);
+        return contactRepository.saveAndFlush(contact);
     }
 
     @Override
     @Transactional
     public Contact addContactToGroup(Contact contact, Group group) {
-        return contact;
+        Set<Group> groups = contact.getGroups();
+        if (groups != null) {
+            groups.add(group);
+        } else {
+            groups = Collections.singleton(group);
+        }
+        contact.setGroups(groups);
+        return update(contact);
     }
 
     @Override
@@ -51,20 +58,40 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findAll();
     }
 
+    @Override
+    public Contact getById(Long id){
+        return contactRepository.findById(id).orElseThrow(() -> new ServiceException("NO Contact with id %s", id));
+    }
+
+    @Override
+    public void delete(Contact contact){
+        if (contact.getId() == null) throw new ServiceException("Contact id is null");
+        if (!isExist(contact.getId())) throw new ServiceException("NO Contact with id %s", contact.getId());
+        contactRepository.deleteById(contact.getId());
+    }
+
+    @Override
+    public Boolean isExist(Long id){
+        return contactRepository.existsById(id);
+    }
+
     private void validateNewContact(Contact contact) throws ServiceException {
         if (contact == null) throw new ServiceException("Contact is null");
-        if (!isText(contact.getFirsName()))
-            throw new ServiceException("Contact firstName must contain only letters");
-        if (!isText(contact.getLastName()))
-            throw new ServiceException("Contact lastName must contain only letters");
+        Set<Group> groups = contact.getGroups();
+        if (groups != null && !groups.isEmpty()) {
+            if (groups.stream().anyMatch(group -> group.getId() == null)){
+                throw new ServiceException("All groups should be persist objects. \n %s", groups);
+            }
+        }
         if (!isEmail(contact.getEmail())) {
-            throw new ServiceException("Contact email is not valid");
+            throw new ServiceValidationException("Contact email is not valid");
         }
         if (contact.getPhones().isEmpty()) {
-            throw new ServiceException("Contact must contain at least one phone");
+            throw new ServiceValidationException("Contact must contain at least one phone");
         } else {
-            if (!isPhones(contact.getPhones()))
-                throw new ServiceException("Contact phone format is illegal. Try +###-##-#######");
+            List<String> invalidPhones = filterInvalidPhones(contact.getPhones());
+            if (!invalidPhones.isEmpty())
+                throw new ServiceValidationException("Contact phone format is illegal \n%s. \nTry +###-##-#######", invalidPhones);
         }
     }
 }
