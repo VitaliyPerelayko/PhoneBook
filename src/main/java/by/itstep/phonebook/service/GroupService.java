@@ -8,4 +8,8 @@ import java.util.Set;
 public interface GroupService {
 
     List<Group> getAll();
+
+    Group getByName(String name);
+
+    Group save(Group group);
 }

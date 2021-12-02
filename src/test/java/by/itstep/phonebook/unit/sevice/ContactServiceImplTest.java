@@ -1,4 +1,4 @@
-package by.itstep.phonebook.sevice;
+package by.itstep.phonebook.unit.sevice;
 
 import by.itstep.phonebook.dao.entity.Contact;
 import by.itstep.phonebook.dao.entity.Group;

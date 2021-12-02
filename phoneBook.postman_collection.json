@@ -1,0 +1,36 @@
+{
+	"info": {
+		"_postman_id": "fbcab921-9ab3-408f-92d6-91fbc10693cd",
+		"name": "phoneBook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "contact",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/phonebook_war/rest/v1.0/contact",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"phonebook_war",
+								"rest",
+								"v1.0",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

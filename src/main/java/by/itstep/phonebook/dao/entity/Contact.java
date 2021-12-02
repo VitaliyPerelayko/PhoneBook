@@ -1,6 +1,8 @@
 package by.itstep.phonebook.dao.entity;
 
 import by.itstep.phonebook.dao.entity.converter.ListStringConverter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -24,7 +26,7 @@ public class Contact {
     private List<String> phones;
     @Column(name = "email", length = 50)
     private String email;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "contact_has_group",
             joinColumns = @JoinColumn(name = "contact_id"),

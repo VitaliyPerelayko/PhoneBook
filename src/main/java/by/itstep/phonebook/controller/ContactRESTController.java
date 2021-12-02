@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/rest/v1.0/contact")
@@ -33,18 +32,19 @@ public class ContactRESTController {
     }
 
     @PostMapping
-    public ResponseEntity<Contact> createContact(Contact contact) {
+    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
+        System.out.println("=====CONTROLLER======= " + contact);
         return new ResponseEntity<>(contactService.save(contact), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Contact> updateContact(Contact contact, @PathVariable Long id) {
+    public ResponseEntity<Contact> updateContact(@RequestBody Contact contact, @PathVariable Long id) {
         if (!Objects.equals(contact.getId(), id)) throw new ControllerException("Unexpected contact id. Path id %s doesn't match contact id %s", id, contact);
         return new ResponseEntity<>(contactService.update(contact), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteContact(Contact contact) {
+    public ResponseEntity<String> deleteContact(@RequestBody Contact contact) {
         contactService.delete(contact);
         return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
     }

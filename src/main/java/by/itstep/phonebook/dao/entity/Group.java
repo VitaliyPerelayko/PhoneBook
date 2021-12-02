@@ -1,5 +1,7 @@
 package by.itstep.phonebook.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -14,6 +16,7 @@ public class Group {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
     @ManyToMany(mappedBy = "groups")
+    @JsonIgnore
     private Set<Contact> contacts;
 
     public Group(Long id, String name) {

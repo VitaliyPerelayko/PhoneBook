@@ -27,14 +27,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .map(objectError -> objectError.getDefaultMessage().concat(NEXT_LINE))
                 .reduce(EMPTY, String::concat);
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(errorMessage);
-        return new ResponseEntity(errorResponseDTO, HttpStatus.BAD_REQUEST);
+        LOGGER.error(errorMessage, exception);
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
     // TODO если ошибка упала у админа отбвавть ему респонс со стектрейсом наверно делает тоже самое, надо посмотреть
-    protected ResponseEntity<Object> handleRuntimeException(RuntimeException exception, WebRequest request) {
+    //handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
+    protected ResponseEntity<ErrorResponseDto> handleRuntimeException(RuntimeException exception, WebRequest request) {
         LOGGER.error(exception.getMessage(), exception);
-        //ErrorResponseDto errorResponseDTO = new ErrorResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        return null;//handleExceptionInternal(exception, errorResponseDTO, new HttpHeaders(), errorResponseDTO.getHttpStatus(), request);
+        ErrorResponseDto errorResponseDTO = new ErrorResponseDto(exception.getMessage());
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

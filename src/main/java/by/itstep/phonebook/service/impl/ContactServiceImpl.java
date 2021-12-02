@@ -59,6 +59,11 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public List<Contact> getAllByEmail(String email){
+        return contactRepository.getAllByEmail(email);
+    }
+
+    @Override
     public Contact getById(Long id){
         return contactRepository.findById(id).orElseThrow(() -> new ServiceException("NO Contact with id %s", id));
     }
@@ -84,6 +89,7 @@ public class ContactServiceImpl implements ContactService {
             }
         }
         if (!isEmail(contact.getEmail())) {
+            System.out.println("---------" + contact.getEmail());
             throw new ServiceValidationException("Contact email is not valid");
         }
         if (contact.getPhones().isEmpty()) {

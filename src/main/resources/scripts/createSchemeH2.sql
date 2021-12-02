@@ -1,7 +1,7 @@
 -- -----------------------------------------------------
 -- Table group
 -- -----------------------------------------------------
-CREATE TABLE if not exists phoneBook.circle (
+CREATE TABLE if not exists circle (
                                                     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                                     name VARCHAR(50) NOT NULL
                                                );
@@ -12,13 +12,12 @@ CREATE TABLE if not exists phoneBook.circle (
 -- -----------------------------------------------------
 -- Table contact
 -- -----------------------------------------------------
-CREATE TABLE if not exists phoneBook.contact (
-                                                   id BIGINT NOT NULL,
+CREATE TABLE if not exists contact (
+                                                   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                                    first_name VARCHAR(50) NULL,
                                                    last_name VARCHAR(50) NOT NULL,
                                                    email VARCHAR(50) NULL,
-                                                   phones VARCHAR(200) NOT NULL,
-                                                   PRIMARY KEY (id)
+                                                   phones VARCHAR(200) NOT NULL
                                           );
 
 
@@ -26,7 +25,7 @@ CREATE TABLE if not exists phoneBook.contact (
 -- -----------------------------------------------------
 -- Table contact_has_group
 -- -----------------------------------------------------
-CREATE TABLE if not exists phoneBook.contact_has_group (
+CREATE TABLE if not exists contact_has_group (
                                                         contact_id BIGINT NOT NULL,
                                                         group_id BIGINT NOT NULL,
                                                         PRIMARY KEY (contact_id, group_id),
